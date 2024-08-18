@@ -1,8 +1,8 @@
 import './InputContainer.css';
 
-function InputContainer({ iconClass, type, placeholder, id, name, value, onChange }) {
+function InputContainer({ iconClass, type, placeholder, id, name, value, onChange, inputClass }) {
     return (
-        <div className="input-container">
+        <div className={`input-container ${inputClass}`}>
             <i className={iconClass}></i>
             <input 
                 type={type} 
@@ -10,7 +10,7 @@ function InputContainer({ iconClass, type, placeholder, id, name, value, onChang
                 id={id} 
                 name={name} 
                 value={value} 
-                onChange={onChange} 
+                onChange={onChange}                 
             />
         </div>
     );

@@ -1,0 +1,47 @@
+.bet-resume h2 {
+    color: white;
+}
+
+.bet-resume h4,
+p {
+    color: grey;
+    /* margin-top: 5px; */
+    font-size: 20px;
+}
+
+.choice-img h3 {
+    text-align: center;
+    color: white;
+}
+
+.sb-line {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.room-participants {
+    margin-top: 50px;
+    padding: 10px;
+}
+
+.room-participants ul {
+    /* list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; */
+}
+
+.room-participants img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    margin-right: 15px;
+}
+
+.room-participants p {
+    margin-top: 15px;
+    color: grey;
+}

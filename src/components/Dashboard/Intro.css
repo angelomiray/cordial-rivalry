@@ -1,0 +1,19 @@
+#intro {
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 25px; */
+}
+
+
+#right-intro {
+    display: flex;
+    flex-direction: row;
+}
+
+#profile-pic img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    /* border: 1px solid grey; */
+}

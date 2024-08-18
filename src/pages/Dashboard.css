@@ -1,0 +1,103 @@
+#container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#dashboard {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+/* BETS OVERVIEW */
+
+#bets-card {
+    /* border: 1px solid blue; */
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+}
+
+#bet-list {
+    /* display: flex;
+    flex-direction: column; */
+    /* width: 50%; */
+    /* margin-right: 35px; */
+}
+
+.bet-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.bet-info span {
+    color: white !important;
+    font-weight: bold !important;
+    font-size: 18px !important;
+}
+
+.bet-info h4 {
+    color: grey;
+    font-size: 16px;
+}
+
+.bet-info h3 {
+    display: inline;
+    padding: 5px 20px;
+    text-align: left;
+    border-radius: 25px;
+    color: greenyellow;
+    background-color: rgba(255, 255, 255, 0.1);
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.bet-info span,
+.bet-info h4 {
+    width: 100%;
+    text-align: left;
+    /* Garante que o texto dentro dos elementos esteja alinhado à esquerda */
+    white-space: nowrap;
+    /* Impede que o texto quebre em várias linhas */
+    overflow: hidden;
+    /* Esconde qualquer texto que exceda a largura do elemento */
+    text-overflow: ellipsis;
+    /* Adiciona reticências (...) ao texto que excede a largura do elemento */
+}
+
+.choice-img img {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+}
+
+#bets-card .bet-resume {
+    display: flex;
+    flex-direction: column;
+    /* padding: 15px; */
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+}
+
+#bet-list li {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 15px;
+    /* background-color: red; */
+}
+
+#bet-list li img {
+    height: 125px;
+    width: 125px;
+    border-radius: 10px;
+    margin-right: 25px;
+}
+
+

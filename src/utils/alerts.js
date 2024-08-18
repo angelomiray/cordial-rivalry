@@ -1,7 +1,9 @@
-export function showAlert(type, message) {
-    const alertContainer = document.getElementById('alert-container');
-    alertContainer.innerHTML = `<div class="alert alert-${type}" role="alert">${message}</div>`;
-    setTimeout(() => {
-        alertContainer.innerHTML = '';
-    }, 5000);
-}
+import { toast } from 'react-toastify';
+
+export const showAlert = (type, message) => {
+    if (type === 'success') {
+        toast.success(message);
+    } else if (type === 'danger') {
+        toast.error(message);
+    }
+};

@@ -45,7 +45,7 @@ function Navbar() {
                             <Link to="/dashboard" className="nav-link link">Go to your Bets Dashboard</Link>                            
                         </div>
                     ) : (
-                        <div className="login">
+                        <div className="d-flex">
                             <Link to="/signin" className="nav-link text-light mr-4">Login</Link>
                             <Link to="/signup" className="nav-link emp-btn text-light">Sign Up</Link>
                         </div>
