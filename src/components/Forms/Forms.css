@@ -1,0 +1,75 @@
+#signin-content {
+    display: flex;
+    justify-content: space-between;
+    /* padding: 35px; */
+}
+
+#signin-form,
+#signup-form {
+    /* border: 1px solid red; */
+    border-radius: 5%;
+    /* padding: 50px; */
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#signin-form h2,
+#signup-form h2 {
+    font-weight: normal;
+    border-bottom: 2.5px solid greenyellow !important;
+    display: inline;
+}
+
+#signin-form h4,
+#signup-form h4 {
+    color: grey;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+
+.two-items-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+
+/* Esconder o checkbox padrão */
+input[type="checkbox"] {
+    display: none;
+}
+
+/* novo elemento que representará o checkbox */
+input[type="checkbox"]+label::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    background-color: transparent;
+    border-radius: 3px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* estilo quando o checkbox está marcado */
+input[type="checkbox"]:checked+label::before {
+    background-color: greenyellow;
+    border-color: greenyellow;
+}
+
+label {
+    vertical-align: middle;
+    color: grey;
+}
+
+p {
+    font-size: 16px;
+    color: grey;
+}
+
+.link {
+    color: greenyellow;
+}

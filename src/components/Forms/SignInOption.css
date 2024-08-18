@@ -1,0 +1,22 @@
+.option-card {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    height: 0px;
+    padding: 25px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.option-card i {
+    margin-right: 20px;    
+}
+
+.option-card h3 {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+i, h3 {
+    color: white;
+}

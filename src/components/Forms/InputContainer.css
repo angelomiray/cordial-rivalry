@@ -1,0 +1,29 @@
+.input-container {
+    position: relative;
+    margin-bottom: 35px;    
+}
+
+.input-container input {
+    color: white;
+}
+
+.input-container input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    background-color: transparent;
+    outline: none;
+    /* Remove o contorno ao clicar */
+}
+
+.input-container i {
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: grey;
+}

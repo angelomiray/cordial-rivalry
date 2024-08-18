@@ -1,0 +1,17 @@
+#welcome {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#welcome h1 {
+    font-size: 72px;
+    margin-bottom: 100px;
+}
+
+#welcome h4 {
+    color: grey;
+    font-weight: normal;
+    margin-bottom: 50px;
+    font-size: 20px;
+}
