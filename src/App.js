@@ -10,6 +10,8 @@ import Profile from './pages/Profile';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RoomSettings from './pages/RoomSettings';
+import RoomDetails from './pages/RoomDetails';
+
 
 
 
@@ -25,6 +27,7 @@ export default function App() {
         <Route path="/rooms" element={<Rooms />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/roomSettings" element={<RoomSettings />} />
+        <Route path="/roomDetails" element={<RoomDetails />} />
       </Routes>
     </BrowserRouter>
   );

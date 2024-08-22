@@ -43,6 +43,20 @@ const api = {
         }
 
         return response.json();
+    },
+
+    async delete(path) {
+        const response = await fetch(`${BASE_URL}${path}.json`, {
+            method: 'DELETE',
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        // Firebase returns an empty body on a successful delete request.
+        // Return a success message or empty object to indicate successful deletion.
+        return {}; 
     }
 };
 

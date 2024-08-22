@@ -1,0 +1,61 @@
+.bet-resume {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.dropdown-menu li:hover {
+    cursor: pointer;
+}
+
+#betsList .card {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.card-link i {
+    font-size: 24px;
+    color: gold;
+}
+
+.card {
+    position: relative;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Alternar para 'contain' se preferir manter a imagem inteira visível */
+    border-radius: 5px; /* Ajuste conforme necessário */
+}
+
+/* Adicionando um contêiner para a imagem para controlar o tamanho */
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-header img {
+    width: 150px; /* Ajuste o tamanho conforme necessário */
+    height: 100px; /* Ajuste o tamanho conforme necessário */
+    object-fit: cover;
+}
+
+.bet-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.bet-info h5 {
+    margin: 0;
+}
+
+.dropdown-menu {
+    background-color: white; /* Ou qualquer cor de fundo que você preferir */
+    border: 1px solid #ddd; /* Ajuste conforme necessário */
+}
+
+
+
+
+
+

@@ -5,12 +5,13 @@ import Intro from '../components/Dashboard/Intro';
 import { getRooms } from '../services/room'; // Import the getRooms function
 import './Rooms.css'; // Import custom CSS file
 import { Dropdown } from 'react-bootstrap';
-
+import { Link, useNavigate } from 'react-router-dom';
 function Rooms() {
     const [rooms, setRooms] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
+    const navigate = useNavigate();
+    
     useEffect(() => {
         const fetchRooms = async () => {
             try {
@@ -81,7 +82,7 @@ function Rooms() {
                                         <div
                                             key={room.id}
                                             className="room-card col-xl-3 col-lg-4 col-sm-5 p-0 mr-2 mb-2"
-                                            onClick={() => window.location.href = `room_details.html?roomId=${room.id}`}
+                                            onClick={() => navigate("/RoomDetails", { state: { room } })}
                                         >
                                             <div className="card-img-container">
                                                 <img className="card-img-top" src={room.imgUrl} alt={room.title} />
@@ -91,7 +92,7 @@ function Rooms() {
                                                 <h4 className="text-truncate" style={{ color: 'wheat' }}>{room.subtitle}</h4>
                                                 <div className="card-date">
                                                     <i className="far fa-calendar-alt mr-2"></i>
-                                                    {room.date ? new Date(room.date).toLocaleDateString() : 'Date not available'}
+                                                    {'May 15'}
                                                 </div>
                                             </div>
                                         </div>
