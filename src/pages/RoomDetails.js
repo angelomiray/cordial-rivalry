@@ -66,6 +66,10 @@ function RoomDetails() {
         return <div>No room data available</div>;
     }
 
+    function checkOwnership(bet) {
+        return (bet.roomId === room.id);
+    }
+
     return (
         <>
             <Background />
@@ -80,7 +84,7 @@ function RoomDetails() {
                         <div id="bet-list" className="col-12">
                             <ul className="list-unstyled d-flex flex-column flex-lg-column flex-md-row nowrap" style={{ overflowX: 'auto' }}>
                                 {bets.map(bet => (
-                                    currentUser.id === bet.owner &&
+                                    checkOwnership(bet) &&
                                     <BetCard
                                         key={bet.id}
                                         isOwner={currentUser.id === bet.owner}

@@ -49,6 +49,7 @@ function BetCard({ betData, isOwner, userId, roomId }) { // Adicione userId e ro
         try {
             await updateBet(betData.id, updatedBetData);
             handleCloseEditModal(); // Fecha o modal após atualizar
+            window.location.reload();
         } catch (error) {
             console.error('Failed to update bet:', error);
         }
@@ -57,7 +58,7 @@ function BetCard({ betData, isOwner, userId, roomId }) { // Adicione userId e ro
     const handleDelete = async () => {
         try {
             await deleteBet(betData.id, betData);
-            // Adicione lógica para atualizar a UI após a exclusão, se necessário
+            window.location.reload();
         } catch (error) {
             console.error('Failed to delete bet:', error);
         }
@@ -79,8 +80,8 @@ function BetCard({ betData, isOwner, userId, roomId }) { // Adicione userId e ro
     
 
     return (
-        <div className="card mb-2 p-3 mt-3">
-            <div className="card-header d-flex justify-content-between align-items-center flex-wrap p-0">
+        <div className="card d-flex mb-2 p-3 mt-3">
+            <div className="card-header d-flex justify-content-between flex-row  align-items-center flex-wrap p-0">
                 <div className="d-flex align-items-center mb-lg-0 mb-4 col-lg-5 col-sm-12">
                     <img className="img-fluid" src={betData.imgUrl} alt="Bet" />
                     <div className="ml-3">

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import api from '../../services/api'; // Ajuste o caminho conforme necessário
+import './Body.css';
+
 
 function Body() {
     const [roomCode, setRoomCode] = useState('');
@@ -17,7 +19,7 @@ function Body() {
         try {
             // Verificar se a sala existe
             const room = await api.get(`rooms/${roomCode}`);
-            
+
             if (!room) {
                 alert('Room not found.');
                 return;
@@ -31,24 +33,24 @@ function Body() {
             }
 
             const userId = JSON.parse(user).id;
-            
+
             // Recuperar dados do usuário
             const userData = await api.get(`users/${userId}`);
-            
+
             if (!userData) {
                 alert('User data not found.');
                 return;
             }
-            
+
             // Adicionar o código da sala ao objeto do usuário
             const updatedRooms = userData.rooms ? [...userData.rooms, roomCode] : [roomCode];
-            
+
             // Atualizar o objeto do usuário com a nova lista de salas
             const updatedUserData = {
                 ...userData,
                 rooms: updatedRooms
             };
-            
+
             await api.put(`users/${userId}`, updatedUserData);
 
             alert('Joined the room successfully!');
@@ -106,16 +108,17 @@ function Body() {
                                 <a href="../html/signin.html" style={{ color: "greenyellow", textDecoration: "none", marginLeft: "10px" }}>
                                     Register now
                                 </a>
-                            </p>
+                            </p>                            
                         </div>
-                        <div className="col-lg-4 col-md-12 col-sm-12 col-12">
-                            <button
-                                className="emp-btn mt-3 py-3 col-lg-8 text-center"
-                                onClick={handleJoinClick}
-                            >
-                                Join
-                            </button>
-                        </div>
+
+                        <div className="col-lg-4 col-md-12 col-sm-12 col-12 d-flex flex-column">
+                                <button
+                                    className="emp-btn mt-3 py-3 col-lg-8 text-center"
+                                    onClick={handleJoinClick}
+                                >
+                                    Join
+                                </button>
+                            </div>
                     </div>
                 </div>
             </div>

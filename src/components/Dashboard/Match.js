@@ -66,6 +66,7 @@ function Match({ room, currentUser }) {
             const betId = await saveBet(betData);
             console.log('Bet saved with ID:', betId);
             handleCloseModal(); // Fecha o modal após salvar
+            window.location.reload();
         } catch (error) {
             console.error('Failed to save bet:', error);
         }
