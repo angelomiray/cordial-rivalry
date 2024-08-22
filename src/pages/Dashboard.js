@@ -3,7 +3,7 @@ import Background from "../components/Background";
 import Card from "../components/Dashboard/Card";
 import Intro from "../components/Dashboard/Intro";
 import Sidebar from "../components/Sidebar/Sidebar";
-import { getRooms } from '../services/room';
+import { getRooms, getUserRooms } from '../services/room'; // Ajuste conforme necessário
 import './Dashboard.css';
 import BetItem from '../components/Dashboard/BetItem';
 import BetItemResume from '../components/Dashboard/BetItemResume';
@@ -30,9 +30,16 @@ function Dashboard() {
         }
 
         try {
+            // Obter a lista de salas do usuário
+            const userRooms = await getUserRooms(currentUser.id);
+            // Obter todas as salas
             const roomsData = await getRooms();
-            const roomsList = Object.entries(roomsData).map(([id, room]) => ({ id, ...room }));
-            setRooms(roomsList);
+            // Filtrar as salas para incluir apenas as que o usuário pertence ou é dono
+            const filteredRooms = Object.entries(roomsData).filter(([id, room]) => 
+                userRooms.includes(id) || room.ownerId === currentUser.id
+            ).map(([id, room]) => ({ id, ...room }));
+            
+            setRooms(filteredRooms);
         } catch (error) {
             console.error('Error loading rooms:', error);
         }

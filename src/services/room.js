@@ -18,16 +18,24 @@ export async function updateRoom(key, roomData) {
         throw error; // Re-lança o erro para ser capturado na função submitRoom
     }
 }
-
-export async function getRooms() {
+export const getRooms = async () => {
     try {
-        const rooms = await api.get('rooms');
-        return rooms;
+        return await api.get('rooms');
     } catch (error) {
-        console.error('Erro ao buscar salas:', error);
+        console.error('Error fetching rooms:', error);
         throw error;
     }
-}
+};
+
+export const getUserRooms = async (userId) => {
+    try {
+        const user = await api.get(`users/${userId}`);
+        return user.rooms || [];
+    } catch (error) {
+        console.error('Error fetching user rooms:', error);
+        throw error;
+    }
+};
 
 export async function getRoomById(roomId) {
     try {
@@ -38,3 +46,4 @@ export async function getRoomById(roomId) {
         throw error;
     }
 }
+

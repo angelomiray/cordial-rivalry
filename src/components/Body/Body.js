@@ -1,4 +1,63 @@
+import React, { useState } from 'react';
+import api from '../../services/api'; // Ajuste o caminho conforme necessário
+
 function Body() {
+    const [roomCode, setRoomCode] = useState('');
+
+    const handleRoomCodeChange = (event) => {
+        setRoomCode(event.target.value);
+    };
+
+    const handleJoinClick = async () => {
+        if (!roomCode) {
+            alert('Please enter a room code.');
+            return;
+        }
+
+        try {
+            // Verificar se a sala existe
+            const room = await api.get(`rooms/${roomCode}`);
+            
+            if (!room) {
+                alert('Room not found.');
+                return;
+            }
+
+            // Verificar se o usuário está autenticado
+            const user = localStorage.getItem('currentUser'); // Ajuste conforme seu método de autenticação
+            if (!user) {
+                alert('Please log in to join a room.');
+                return;
+            }
+
+            const userId = JSON.parse(user).id;
+            
+            // Recuperar dados do usuário
+            const userData = await api.get(`users/${userId}`);
+            
+            if (!userData) {
+                alert('User data not found.');
+                return;
+            }
+            
+            // Adicionar o código da sala ao objeto do usuário
+            const updatedRooms = userData.rooms ? [...userData.rooms, roomCode] : [roomCode];
+            
+            // Atualizar o objeto do usuário com a nova lista de salas
+            const updatedUserData = {
+                ...userData,
+                rooms: updatedRooms
+            };
+            
+            await api.put(`users/${userId}`, updatedUserData);
+
+            alert('Joined the room successfully!');
+        } catch (error) {
+            console.error('Error details:', error);
+            alert('An error occurred while trying to join the room. Please check the console for more details.');
+        }
+    };
+
     return (
         <div className="content">
             <div className="main-content container row justify-content-center col-12 align-items-center">
@@ -35,7 +94,13 @@ function Body() {
                     <div className="row col-12 d-flex justify-content-center">
                         <div className="search-box col-lg-8 col-md-12 col-sm-12 col-12">
                             <p className="col-12"> When creating a room, the creator receives a room code </p>
-                            <input className="p-3 mb-1 col-12" type="text" placeholder="Put room code here..." />
+                            <input
+                                className="p-3 mb-1 col-12"
+                                type="text"
+                                placeholder="Put room code here..."
+                                value={roomCode}
+                                onChange={handleRoomCodeChange}
+                            />
                             <p className="col-12" style={{ textAlign: "left", color: "grey", fontSize: "16px" }}>
                                 Don't have an account?
                                 <a href="../html/signin.html" style={{ color: "greenyellow", textDecoration: "none", marginLeft: "10px" }}>
@@ -44,7 +109,12 @@ function Body() {
                             </p>
                         </div>
                         <div className="col-lg-4 col-md-12 col-sm-12 col-12">
-                            <button className="emp-btn mt-3 py-3 col-lg-8 text-center">Join</button>
+                            <button
+                                className="emp-btn mt-3 py-3 col-lg-8 text-center"
+                                onClick={handleJoinClick}
+                            >
+                                Join
+                            </button>
                         </div>
                     </div>
                 </div>

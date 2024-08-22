@@ -17,7 +17,9 @@ function SignUp() {
         email: '',
         password: '',
         confirmPassword: '',
-        imgUrl: ''
+        imgUrl: '',
+        rooms: [], // Adiciona a variável rooms
+        points: 1000 // Adiciona a variável points com valor fixo
     });
 
     const handleChange = (event) => {
@@ -49,7 +51,9 @@ function SignUp() {
             surname: formData.surname,
             email: formData.email,
             pw: await sha256(formData.password),
-            imgUrl: formData.imgUrl
+            imgUrl: formData.imgUrl,
+            rooms: [], // Inclua a variável rooms
+            points: formData.points // Inclua a variável points
         };
 
         try {
@@ -64,7 +68,9 @@ function SignUp() {
                 email: '',
                 password: '',
                 confirmPassword: '',
-                imgUrl: ''
+                imgUrl: '',
+                rooms: [], // Limpe a variável rooms
+                points: 1000 // Mantenha a variável points como fixa
             });
 
             showAlert('success', 'Perfil criado com sucesso!');

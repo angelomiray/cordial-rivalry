@@ -1,20 +1,32 @@
 import React, { useState } from 'react';
 import './BetCard.css';
 import { Dropdown, Modal, Button, Form } from 'react-bootstrap';
-import { updateBet, deleteBet } from '../../services/bets';
+import { updateBet, deleteBet } from '../../services/bets'; // Ajuste conforme necessário
+import { createBet } from '../../services/userBets';
 
-function BetCard({ betData, isOwner }) {
-    const [showModal, setShowModal] = useState(false);
+function BetCard({ betData, isOwner, userId, roomId }) { // Adicione userId e roomId como props
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [showBetModal, setShowBetModal] = useState(false);
     const [betTitle, setBetTitle] = useState(betData.title);
     const [betType, setBetType] = useState(betData.type);
-    const [options, setOptions] = useState([betData.option1, betData.option2, betData.option3, betData.option4, betData.option5]); // Ajuste conforme necessário
+    const [options, setOptions] = useState([betData.option1, betData.option2, betData.option3, betData.option4, betData.option5]);
+    const [selectedOption, setSelectedOption] = useState('');
+    const [betAmount, setBetAmount] = useState('');
 
-    const handleOpenModal = () => {
-        setShowModal(true);
+    const handleOpenEditModal = () => {
+        setShowEditModal(true);
     };
 
-    const handleCloseModal = () => {
-        setShowModal(false);
+    const handleCloseEditModal = () => {
+        setShowEditModal(false);
+    };
+
+    const handleOpenBetModal = () => {
+        setShowBetModal(true);
+    };
+
+    const handleCloseBetModal = () => {
+        setShowBetModal(false);
     };
 
     const handleOptionChange = (index, value) => {
@@ -36,7 +48,7 @@ function BetCard({ betData, isOwner }) {
 
         try {
             await updateBet(betData.id, updatedBetData);
-            handleCloseModal(); // Fecha o modal após atualizar
+            handleCloseEditModal(); // Fecha o modal após atualizar
         } catch (error) {
             console.error('Failed to update bet:', error);
         }
@@ -51,6 +63,21 @@ function BetCard({ betData, isOwner }) {
         }
     };
 
+    const handleBetSubmit = async () => {
+        if (!selectedOption || !betAmount) {
+            alert('Please select an option and enter an amount.');
+            return;
+        }
+    
+        try {
+            await createBet(userId, roomId, betData.id, betAmount, selectedOption);
+            handleCloseBetModal();
+        } catch (error) {
+            console.error('Failed to place bet:', error);
+        }
+    };
+    
+
     return (
         <div className="card mb-2 p-3 mt-3">
             <div className="card-header d-flex justify-content-between align-items-center flex-wrap p-0">
@@ -64,7 +91,7 @@ function BetCard({ betData, isOwner }) {
                 <div className="bet-info col-lg-7 col-sm-12 d-flex flex-row align-items-center">
                     <h5 className="col-lg-3">{betData.type.toUpperCase()}</h5>
                     <h5 className="col-lg-3" style={{ color: 'greenyellow' }}>{betData.status ? 'OPEN' : 'CLOSED'}</h5>
-                    <a className="card-link col-lg-1" data-toggle="modal" href={`#betModal-${betData.id}`}>
+                    <a className="card-link col-lg-1" onClick={handleOpenBetModal}>
                         <i className="fas fa-dollar-sign"></i>
                     </a>
                     {isOwner && (
@@ -78,7 +105,7 @@ function BetCard({ betData, isOwner }) {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
-                                <Dropdown.Item href="#" onClick={handleOpenModal}>Atualizar</Dropdown.Item>
+                                <Dropdown.Item href="#" onClick={handleOpenEditModal}>Atualizar</Dropdown.Item>
                                 <Dropdown.Item href="#" onClick={handleDelete}>Deletar</Dropdown.Item>                                
                             </Dropdown.Menu>
                         </Dropdown>
@@ -86,8 +113,8 @@ function BetCard({ betData, isOwner }) {
                 </div>
             </div>
 
-            {/* Modal */}
-            <Modal show={showModal} onHide={handleCloseModal}>
+            {/* Edit Modal */}
+            <Modal show={showEditModal} onHide={handleCloseEditModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Update Bet</Modal.Title>
                 </Modal.Header>
@@ -127,11 +154,54 @@ function BetCard({ betData, isOwner }) {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseModal}>
+                    <Button variant="secondary" onClick={handleCloseEditModal}>
                         Close
                     </Button>
                     <Button variant="primary" onClick={handleSave}>
                         Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/* Bet Modal */}
+            <Modal show={showBetModal} onHide={handleCloseBetModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Place Your Bet</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group controlId="formBetOptions">
+                            <Form.Label>Select an Option</Form.Label>
+                            <Form.Control
+                                as="select"
+                                value={selectedOption}
+                                onChange={(e) => setSelectedOption(e.target.value)}
+                            >
+                                <option value="">Select an option</option>
+                                {options.map((option, index) => (
+                                    <option key={index} value={option}>
+                                        {option}
+                                    </option>
+                                ))}
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId="formBetAmount">
+                            <Form.Label>Enter Bet Amount</Form.Label>
+                            <Form.Control
+                                type="number"
+                                min="1"
+                                value={betAmount}
+                                onChange={(e) => setBetAmount(e.target.value)}
+                            />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseBetModal}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleBetSubmit}>
+                        Place Bet
                     </Button>
                 </Modal.Footer>
             </Modal>

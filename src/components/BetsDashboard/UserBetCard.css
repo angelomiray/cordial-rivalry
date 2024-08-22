@@ -1,0 +1,50 @@
+/* src/components/BetsDashboard/UserBetCard.css */
+
+.user-bet-card {
+    background-color: #181818;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.user-bet-card:hover {
+    background-color: #282828;
+}
+
+.bet-info {
+    color: #ffffff;
+}
+
+.bet-title {
+    font-weight: bold;
+    color: #1db954;
+}
+
+.bet-room, .bet-option, .amount-label {
+    font-size: 0.9rem;
+}
+
+.bet-amount {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    color: #ffffff;
+}
+
+.amount-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1db954;
+}
+
+@media (max-width: 768px) {
+    .user-bet-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .bet-amount {
+        align-items: flex-start;
+        margin-top: 10px;
+    }
+}

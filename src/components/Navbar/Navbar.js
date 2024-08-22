@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import Logo from '../Logo';
 
 function Navbar() {
     const [currentUser, setCurrentUser] = useState(null);
@@ -17,9 +18,7 @@ function Navbar() {
 
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-transparent p-4">
-            <div className="logo">
-                <img src="https://png.pngtree.com/png-vector/20211023/ourmid/pngtree-salon-logo-png-image_4004444.png" alt="Logotipo" />
-            </div>
+            <Logo />
 
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import './Sidebar.css'; // Crie um arquivo CSS para estilizar a Sidebar
+import './Sidebar.css';
 
 const Sidebar = () => {
-    const [activeLink, setActiveLink] = useState('overview-item'); // Default active link
+    const [activeLink, setActiveLink] = useState(localStorage.getItem('selectedItem') || 'overview-item');
     const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Atualiza a classe 'selected' quando a localização muda
         const path = location.pathname;
-        let newActiveLink = 'overview-item'; // Default
+        let newActiveLink = 'overview-item';
 
         if (path === '/rooms') {
             newActiveLink = 'rooms-item';
@@ -21,8 +20,6 @@ const Sidebar = () => {
         }
 
         setActiveLink(newActiveLink);
-
-        // Save the active link to local storage
         localStorage.setItem('selectedItem', newActiveLink);
     }, [location]);
 
@@ -32,9 +29,9 @@ const Sidebar = () => {
         navigate('/');
     };
 
-    // Handle navigation and setting active link
     const handleNavigation = (path, linkId) => {
         setActiveLink(linkId);
+        localStorage.setItem('selectedItem', linkId);
         navigate(path);
     };
 
@@ -45,6 +42,13 @@ const Sidebar = () => {
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav flex-column">
+                    <li className="nav-item logo">
+                        <Link to="/" onClick={() => handleNavigation('/', 'overview-item')}>
+                            {/* <img src="src/img/logo.png" alt="Logo"/> */}
+                            <span className="text-light">RIVALRY</span>
+                        </Link>
+                    </li>
+
                     <li className={`nav-item ${activeLink === 'overview-item' ? 'selected' : ''}`} id="overview-item">
                         <Link className="nav-link" to="/dashboard" onClick={() => handleNavigation('/dashboard', 'overview-item')}>
                             <div className="option">
@@ -62,7 +66,7 @@ const Sidebar = () => {
                         </Link>
                     </li>
                     <li className={`nav-item ${activeLink === 'bets-item' ? 'selected' : ''}`} id="bets-item">
-                        <Link className="nav-link" to="#" onClick={() => handleNavigation('#', 'bets-item')}>
+                        <Link className="nav-link" to="/userBetsDashboard" onClick={() => handleNavigation('/userBetsDashboard', 'bets-item')}>
                             <div className="option">
                                 <i className="fa-solid fa-money-bill"></i>
                                 <span>Bets</span>
